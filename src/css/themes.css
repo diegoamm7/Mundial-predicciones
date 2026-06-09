@@ -1,0 +1,97 @@
+/* ============================================================
+   THEMES — variables CSS para los 3 modos (light · ice · dark)
+   ============================================================ */
+
+/* ☀️ Light (default — el que prefiere Diego) */
+:root, :root[data-theme="light"] {
+  --bg: #f4f7fc;
+  --bg-2: #ffffff;
+  --card: #ffffff;
+  --card-2: #f1f5f9;
+  --border: #d8e0ec;
+  --text: #0a1f3d;
+  --text-dim: #475569;
+  --text-mut: #94a3b8;
+  --accent: #00a86b;
+  --accent-2: #00875a;
+  --gold: #d97706;
+  --red: #dc2626;
+  --red-2: #ef4444;
+  --blue: #2563eb;
+  --blue-2: #3b82f6;
+  --white: #ffffff;
+  --pill: rgba(0, 168, 107, 0.14);
+  --pill-warn: rgba(217,119,6,0.16);
+  --pill-red: rgba(220,38,38,0.14);
+  --pill-blue: rgba(37,99,235,0.14);
+  --shadow-1: 0 2px 6px rgba(0,0,0,0.04);
+  --shadow-2: 0 8px 24px rgba(0,0,0,0.08);
+  --page-gradient:
+    radial-gradient(ellipse at 20% 0%, rgba(220, 38, 38, 0.05) 0%, transparent 40%),
+    radial-gradient(ellipse at 80% 100%, rgba(0, 168, 107, 0.05) 0%, transparent 40%),
+    linear-gradient(180deg, #eef4fc 0%, #dde7f5 100%);
+}
+
+/* ❄️ Ice — gris suave bluish, los colores del Mundial resaltan */
+:root[data-theme="ice"] {
+  --bg: #d9e2ed;
+  --bg-2: #e8eef5;
+  --card: #ffffff;
+  --card-2: #eef3f9;
+  --border: #b9c8db;
+  --text: #0a1f3d;
+  --text-dim: #3f546e;
+  --text-mut: #6b7d94;
+  --accent: #00a86b;
+  --accent-2: #008558;
+  --gold: #b45309;
+  --red: #dc2626;
+  --red-2: #ef4444;
+  --blue: #1e40af;
+  --blue-2: #2563eb;
+  --white: #ffffff;
+  --pill: rgba(0, 168, 107, 0.18);
+  --pill-warn: rgba(180,83,9,0.18);
+  --pill-red: rgba(220,38,38,0.16);
+  --pill-blue: rgba(30,64,175,0.16);
+  --shadow-1: 0 2px 6px rgba(15, 30, 60, 0.08);
+  --shadow-2: 0 8px 28px rgba(15, 30, 60, 0.14);
+  --page-gradient:
+    radial-gradient(ellipse at 20% 0%, rgba(220, 38, 38, 0.10) 0%, transparent 45%),
+    radial-gradient(ellipse at 80% 100%, rgba(0, 168, 107, 0.12) 0%, transparent 45%),
+    radial-gradient(ellipse at 50% 50%, rgba(37, 99, 235, 0.06) 0%, transparent 60%),
+    linear-gradient(180deg, #cfdaea 0%, #b8c7dc 100%);
+}
+:root[data-theme="ice"] .btn-primary {
+  box-shadow: 0 6px 18px rgba(0,168,107,0.45), 0 0 0 1px rgba(0,168,107,0.2);
+}
+
+/* 🌙 Dark — modo oscuro */
+:root[data-theme="dark"] {
+  --bg: #0a1f3d;
+  --bg-2: #0f2952;
+  --card: #14315e;
+  --card-2: #1c3f73;
+  --border: #2a4a85;
+  --text: #ffffff;
+  --text-dim: #b8cae8;
+  --text-mut: #7a93bd;
+  --accent: #00a86b;
+  --accent-2: #2ed187;
+  --gold: #fbbf24;
+  --red: #dc2626;
+  --red-2: #ef4444;
+  --blue: #2563eb;
+  --blue-2: #60a5fa;
+  --white: #ffffff;
+  --pill: rgba(0, 168, 107, 0.16);
+  --pill-warn: rgba(251,191,36,0.14);
+  --pill-red: rgba(239,68,68,0.14);
+  --pill-blue: rgba(96,165,250,0.16);
+  --shadow-1: 0 2px 6px rgba(0,0,0,0.3);
+  --shadow-2: 0 8px 32px rgba(0,0,0,0.4);
+  --page-gradient:
+    radial-gradient(ellipse at 20% 0%, rgba(220, 38, 38, 0.12) 0%, transparent 40%),
+    radial-gradient(ellipse at 80% 100%, rgba(0, 168, 107, 0.12) 0%, transparent 40%),
+    radial-gradient(ellipse at top, #0f2952 0%, #061128 50%, #020610 100%);
+}

@@ -1,0 +1,168 @@
+/* ============================================================
+   LAYOUT — topbar, bottom-nav, splash, screens
+   ============================================================ */
+
+/* === Topbar === */
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px 18px;
+}
+.topbar h1 { font-size: 22px; font-weight: 700; }
+.topbar .sub { color: var(--text-dim); font-size: 13px; margin-top: 2px; }
+.topbar .header-icon {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* === Bottom nav === */
+.bottom-nav {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  max-width: 480px;
+  margin: 0 auto;
+  height: 84px;
+  background: var(--bg-2);
+  backdrop-filter: blur(20px);
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  padding-top: 10px;
+  z-index: 50;
+}
+.nav-item {
+  flex: 1;
+  background: none;
+  border: none;
+  color: var(--text-mut);
+  font-size: 11px;
+  font-weight: 500;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  padding: 6px 0;
+  transition: color 0.2s;
+}
+.nav-item .ic { font-size: 22px; }
+.nav-item.active { color: var(--accent-2); }
+
+/* === Splash === */
+.splash {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+  text-align: center;
+}
+.splash-title { margin-bottom: 24px; text-align: center; }
+.title-pre {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 8px;
+  color: var(--text-dim);
+  margin-bottom: 6px;
+}
+.title-main {
+  font-size: 56px;
+  font-weight: 900;
+  letter-spacing: -2px;
+  line-height: 1;
+  background: linear-gradient(120deg, var(--blue) 0%, var(--accent) 50%, var(--red) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 4px;
+  filter: drop-shadow(0 4px 20px rgba(37,99,235,0.2));
+}
+.title-year {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+.year-line { width: 40px; height: 1px; background: var(--text-mut); opacity: 0.5; }
+.year-text { font-size: 14px; font-weight: 700; letter-spacing: 4px; color: var(--text-dim); }
+.title-stripes {
+  display: flex;
+  width: 140px;
+  height: 4px;
+  margin: 0 auto;
+  border-radius: 999px;
+  overflow: hidden;
+  box-shadow: var(--shadow-1);
+}
+.title-stripes span { flex: 1; }
+.splash-tag { color: var(--text-dim); margin-bottom: 30px; font-size: 14px; line-height: 1.6; }
+
+/* === Section titles === */
+.section-title {
+  font-size: 13px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  font-weight: 700;
+  margin: 18px 20px 10px;
+}
+
+/* === Theme toggle inline (en topbar) === */
+.theme-toggle-inline {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  background: var(--card-2);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 3px;
+}
+.theme-opt-mini {
+  min-width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  color: var(--text);
+  padding: 0 10px;
+  white-space: nowrap;
+}
+.theme-opt-mini:hover { background: var(--card); }
+.theme-opt-mini.active {
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  color: var(--white);
+  box-shadow: 0 2px 8px rgba(0,168,107,0.4);
+}
+.theme-opt-mini[data-t="ice"].active {
+  background: linear-gradient(135deg, var(--blue), var(--blue-2));
+  box-shadow: 0 2px 8px rgba(37,99,235,0.4);
+}
+.theme-opt-mini[data-t="light"].active {
+  background: linear-gradient(135deg, var(--gold), #f59e0b);
+  box-shadow: 0 2px 8px rgba(217,119,6,0.4);
+}
+
+/* === Empty state === */
+.empty {
+  text-align: center;
+  padding: 40px 24px;
+  color: var(--text-dim);
+}
+.empty .ic { font-size: 48px; margin-bottom: 14px; }
+
+/* === Helper === */
+.row { display: flex; align-items: center; justify-content: space-between; }
+.text-center { text-align: center; }
+.muted { color: var(--text-mut); font-size: 12px; }

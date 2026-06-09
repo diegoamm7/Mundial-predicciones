@@ -1,0 +1,43 @@
+/* ============================================================
+   BASE — reset, tipografía, body
+   ============================================================ */
+
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+html, body {
+  background: var(--page-gradient);
+  min-height: 100vh;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  color: var(--text);
+  overflow-x: hidden;
+  transition: background 0.4s ease;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  padding: env(safe-area-inset-top) 0 env(safe-area-inset-bottom);
+  max-width: 480px;
+  margin: 0 auto;
+  min-height: 100vh;
+  position: relative;
+}
+
+h1, h2, h3, h4, h5, h6 { letter-spacing: -0.4px; }
+h1 { font-size: 22px; font-weight: 700; }
+h2 { font-size: 18px; font-weight: 700; }
+h3 { font-size: 15px; font-weight: 700; }
+
+p { line-height: 1.5; }
+
+button { font-family: inherit; }
+a { color: var(--accent-2); text-decoration: none; cursor: pointer; }
+
+/* Scrollbar nativo invisible pero scroll funciona */
+::-webkit-scrollbar { width: 0; height: 0; }
+
+#app {
+  min-height: 100vh;
+  padding-bottom: 90px;
+}
+body:not(.has-nav) #app { padding-bottom: 0; }
