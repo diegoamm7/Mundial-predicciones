@@ -9,8 +9,8 @@
 
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.45.4';
 
-const SUPABASE_URL = 'https://TU-PROYECTO.supabase.co';
-const SUPABASE_ANON_KEY = 'TU_ANON_KEY_AQUI';
+const SUPABASE_URL = 'https://fkwyhouokwsmsqqkdpjm.supabase.co';
+const SUPABASE_ANON_KEY = 'sb_publishable_NO4lchfKfA63Nzb9Nn4rRQ_8rPKWx3B';
 
 if (SUPABASE_URL.includes('TU-PROYECTO')) {
   console.warn('⚠️ Configurá tu Supabase en src/js/supabase.js antes de seguir');
