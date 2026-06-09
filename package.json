@@ -1,0 +1,17 @@
+{
+  "name": "mundial-predicciones",
+  "version": "0.1.0",
+  "description": "PWA de predicciones del Mundial 2026 — vanilla JS + Supabase",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "npx serve -p 3000 .",
+    "deploy": "vercel --prod"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": ["mundial", "world-cup", "predictions", "pwa", "supabase"],
+  "author": "Diego",
+  "license": "UNLICENSED"
+}
