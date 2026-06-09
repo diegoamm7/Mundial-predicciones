@@ -33,6 +33,8 @@
   padding-top: 10px;
   z-index: 50;
 }
+/* El atributo [hidden] gana sobre display:flex — ocultar el nav cuando no hay sesión */
+.bottom-nav[hidden] { display: none !important; }
 .nav-item {
   flex: 1;
   background: none;
