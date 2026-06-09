@@ -43,6 +43,7 @@ function setupBottomNav() {
 
 export function showBottomNav(show = true) {
   bottomNavEl.hidden = !show;
+  bottomNavEl.style.display = show ? 'flex' : 'none'; // fallback por si el browser ignora [hidden]
   document.body.classList.toggle('has-nav', show);
 }
 
