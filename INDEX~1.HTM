@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no" />
+  <meta name="theme-color" content="#00a86b" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Predicciones Mundial" />
+  <meta name="description" content="Predicciones del Mundial 2026 con tus amigos" />
+  <title>Predicciones Mundial</title>
+
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="apple-touch-icon" href="/icons/icon-192.png" />
+  <link rel="icon" type="image/png" href="/icons/icon-192.png" />
+
+  <!-- Estilos modulares (orden importa) -->
+  <link rel="stylesheet" href="/src/css/themes.css" />
+  <link rel="stylesheet" href="/src/css/base.css" />
+  <link rel="stylesheet" href="/src/css/components.css" />
+  <link rel="stylesheet" href="/src/css/layout.css" />
+</head>
+<body>
+  <!-- Shell de la app: contenedor donde el router monta cada view -->
+  <div id="app" aria-live="polite"></div>
+
+  <!-- Bottom navigation (se monta dinámicamente cuando el user está autenticado) -->
+  <nav id="bottom-nav" class="bottom-nav" aria-label="Navegación principal" hidden></nav>
+
+  <!-- Toast / snackbar para mensajes globales -->
+  <div id="toast" class="toast" role="status"></div>
+
+  <!-- Entry point como ES module -->
+  <script type="module" src="/src/js/main.js"></script>
+
+  <!-- Service worker (PWA offline) -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/service-worker.js').catch(() => {});
+      });
+    }
+  </script>
+</body>
+</html>
