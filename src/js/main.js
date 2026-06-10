@@ -52,11 +52,21 @@ async function boot() {
     router.showBottomNav(isAuthed);
   });
 
-  const session = await refreshSession();
-
-  if (session && state.user) {
-    router.render('home');
-  } else {
+  // Try/catch: si algo falla al arrancar (sesión corrupta, perfil borrado,
+  // cache viejo, lo que sea) limpiamos todo y vamos al splash
+  try {
+    const session = await refreshSession();
+    if (session && state.user) {
+      router.render('home');
+    } else {
+      router.render('splash');
+    }
+  } catch (err) {
+    console.error('[boot] error, limpiando estado:', err);
+    try {
+      const { supabase } = await import('./supabase.js');
+      await supabase.auth.signOut();
+    } catch (e) {}
     router.render('splash');
   }
 }
