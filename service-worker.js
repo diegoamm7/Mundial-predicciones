@@ -1,5 +1,5 @@
-// Service Worker — cache-first para assets, network-first para datos
-const CACHE_NAME = 'predicciones-mundial-v1';
+// Service Worker — network-first para HTML/JS (siempre versión nueva), cache para assets
+const CACHE_NAME = 'predicciones-mundial-v2';
 const CORE_ASSETS = [
   '/',
   '/index.html',
@@ -33,20 +33,23 @@ self.addEventListener('fetch', (event) => {
   // Las llamadas a Supabase siempre van por red (sin cache)
   if (url.hostname.endsWith('.supabase.co')) return;
 
-  // Assets estáticos: cache-first
-  if (event.request.method === 'GET' && (url.origin === self.location.origin)) {
-    event.respondWith(
-      caches.match(event.request).then((cached) =>
-        cached || fetch(event.request).then((res) => {
-          if (res.ok && res.type === 'basic') {
-            const clone = res.clone();
-            caches.open(CACHE_NAME).then((c) => c.put(event.request, clone));
-          }
-          return res;
-        }).catch(() => cached)
-      )
-    );
-  }
+  // Solo manejar GET del mismo origen
+  if (event.request.method !== 'GET' || url.origin !== self.location.origin) return;
+
+  // Network-first: siempre intentamos traer la versión nueva de la red.
+  // Si la red falla (modo offline), servimos del cache como fallback.
+  // Esto evita el bug clásico de PWA con código viejo cacheado.
+  event.respondWith(
+    fetch(event.request)
+      .then((res) => {
+        if (res.ok && res.type === 'basic') {
+          const clone = res.clone();
+          caches.open(CACHE_NAME).then((c) => c.put(event.request, clone));
+        }
+        return res;
+      })
+      .catch(() => caches.match(event.request))
+  );
 });
 
 // Recordatorios push (T-30 antes del partido)
