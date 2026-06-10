@@ -7,12 +7,21 @@ import { supabase } from '../supabase.js';
 export async function getMyGroups() {
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) return [];
-  const { data, error } = await supabase
+  // Query simple: primero traemos los group_ids del usuario, después los grupos
+  // (evita joins complejos con FK names que podían colgarse).
+  const { data: memberships, error: err1 } = await supabase
     .from('group_members')
-    .select('group:groups(*, owner:users!groups_owner_id_fkey(username, display_name))')
+    .select('group_id')
     .eq('user_id', user.id);
-  if (error) throw error;
-  return (data || []).map(row => row.group);
+  if (err1) throw err1;
+  if (!memberships || memberships.length === 0) return [];
+  const groupIds = memberships.map(m => m.group_id);
+  const { data: groups, error: err2 } = await supabase
+    .from('groups')
+    .select('*')
+    .in('id', groupIds);
+  if (err2) throw err2;
+  return groups || [];
 }
 
 export async function getGroupRanking(groupId) {
