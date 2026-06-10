@@ -47,27 +47,51 @@ export function showBottomNav(show = true) {
   document.body.classList.toggle('has-nav', show);
 }
 
+// Contador para descartar renders viejas si vino una nueva en el medio.
+// Evita race conditions cuando tocás varias pestañas seguidas.
+let currentRenderId = 0;
+
 export async function render(name, params = {}) {
+  const myId = ++currentRenderId;
   const view = views.get(name);
   if (!view) {
     appEl.innerHTML = `<div class="empty"><div class="ic">🚧</div><div>Pantalla "${name}" no encontrada</div></div>`;
     return;
   }
 
-  // Loading state mientras la view se hidrata (si la fn es async)
+  // Loading state inmediato (asegura feedback visual)
   appEl.innerHTML = `<div class="loading-screen"><div class="spinner"></div></div>`;
+  state.ui.currentView = name;
+  updateNavHighlight(name);
 
   try {
-    const html = await view(params);
+    // Timeout de 8 segundos por si una query se cuelga indefinidamente
+    const html = await Promise.race([
+      view(params),
+      new Promise((_, rej) => setTimeout(() => rej(new Error('Timeout: la pantalla tardó demasiado en cargar')), 8000))
+    ]);
+
+    // Si en el medio iniciaron otra render, abandonar esta
+    if (myId !== currentRenderId) return;
+
     appEl.innerHTML = html;
-    state.ui.currentView = name;
-    updateNavHighlight(name);
     if (typeof view.afterMount === 'function') view.afterMount(params);
     appEl.scrollTop = 0;
     window.scrollTo(0, 0);
   } catch (err) {
-    console.error('Render error', name, err);
-    appEl.innerHTML = `<div class="empty"><div class="ic">⚠️</div><div>Algo salió mal: ${err.message}</div></div>`;
+    if (myId !== currentRenderId) return; // ya estamos en otra pantalla, ignorar
+    console.error('[render]', name, err);
+    appEl.innerHTML = `
+      <div class="empty">
+        <div class="ic">⚠️</div>
+        <div>Algo salió mal cargando ${name}</div>
+        <div style="font-size: 11px; color: var(--text-mut); margin-top: 8px;">${err.message || ''}</div>
+        <div style="margin-top: 20px;">
+          <button class="btn btn-sm" onclick="navigate('${name}')" style="max-width: 200px;">Reintentar</button>
+          <button class="btn btn-ghost btn-sm" onclick="navigate('home')" style="max-width: 200px; margin-top: 8px;">Ir a inicio</button>
+        </div>
+      </div>
+    `;
   }
 }
 
